@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebHack 2K25</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2a4d8e;
+            --secondary: #3561a4;
+            --accent: #4ecdc4;
+            --light: #0a192f;
+            --dark: #020c1b;
+            --card-bg: #112240;
+            --text-light: #e6f1ff;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-light);
+            background-color: var(--light);
+        }
+        
+        .hero {
+          /* background: linear-gradient(rgba(10, 25, 47, 0.75), rgba(10, 25, 47, 0.85)), url('WEBHACK (1).png') center/cover no-repeat;*/  
+            /*background: url('WEBHACK (1).png') center/cover no-repeat;*/
+            background: linear-gradient(rgba(10, 25, 47, 0.4), rgba(10, 25, 47, 0.5)), 
+                url('WEBHACK (1).png') center/cover no-repeat;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(78, 205, 196, 0.15) 0%, transparent 70%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #4ecdc4, #a8ff78, #4ecdc4);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-lead {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            text-align: center;
+            color: var(--accent);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.25);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+            background-color: var(--card-bg);
+            color: var(--text-light);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(78, 205, 196, 0.4);
+        }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .agenda-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #2a4d8e;
+        }
+        
+        .agenda-nav-item {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            color: var(--text-light);
+        }
+        
+        .agenda-nav-item.active {
+            color: var(--accent);
+            border-bottom: 3px solid var(--accent);
+        }
+        
+        .agenda-content {
+            display: none;
+        }
+        
+        .agenda-content.active {
+            display: block;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 25px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+        
+        .timeline-time {
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .register-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin: 60px 0;
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.3);
+        }
+        
+        .btn-register {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            border: none;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+        }
+        
+        .btn-register:hover {
+            background-color: white;
+            color: var(--dark);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.6);
+        }
+        
+        .organizer-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 5px solid var(--secondary);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+        
+        .map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 250px;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.2);
+            color: var(--text-light);
+        }
+        
+        .info-card h2 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .detail-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .detail-item i {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-right: 15px;
+            margin-top: 3px;
+        }
+        
+        .map-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .map-btn {
+            padding: 8px 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: background 0.3s;
+            box-shadow: 0 3px 8px rgba(78, 205, 196, 0.3);
+        }
+        
+        .map-btn:hover {
+            background: var(--secondary);
+            box-shadow: 0 5px 12px rgba(78, 205, 196, 0.4);
+        }
+        
+        .map-btn i {
+            font-size: 0.9rem;
+        }
+        
+        .map-container {
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .size-indicator {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #a8b2d1;
+            margin-top: 10px;
+        }
+        
+        .bg-light {
+            background-color: var(--card-bg) !important;
+        }
+        
+        .text-muted {
+            color: #a8b2d1 !important;
+        }
+        
+        .text-primary {
+            color: var(--accent) !important;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .hero-lead {
+                font-size: 1rem;
+            }
+        }
+
+        .key-themes-container {
+            position: relative;
+            padding: 0 40px;
+        }
+        
+        .cards-scroller {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 20px 0;
+            scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+        }
+        
+        .cards-scroller::-webkit-scrollbar {
+            display: none;  /* Chrome, Safari and Opera */
+        }
+        
+        .theme-card {
+            flex: 0 0 auto;
+            width: 300px;
+            margin-right: 20px;
+        }
+        
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .scroll-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .scroll-btn.left {
+            left: 0;
+        }
+        
+        .scroll-btn.right {
+            right: 0;
+        }
+        
+        .scroll-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            gap: 8px;
+        }
+        
+        .scroll-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(78, 205, 196, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .scroll-indicator.active {
+            background: var(--accent);
+            transform: scale(1.2);
+        }
+
+
+        .theme-card {
+            flex: 0 0 auto;
+            width: 300px;
+            margin-right: 20px;
+            height: 380px; /* Fixed height for all cards */
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .theme-image {
+            height: 150px;
+            width: 100%;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        
+        .theme-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .theme-content h4 {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            min-height: 48px; /* Fixed height for titles */
+        }
+        
+        .theme-content p {
+            flex-grow: 1; /* Makes paragraphs take remaining space */
+            margin-bottom: 0;
+        }
+        
+        .theme-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title">WebHack 2K25</h1>
+            <p class="hero-subtitle">The Premier Web Development Hackathon of the Year</p>
+            <p class="hero-lead">Join us for an exciting 2-day event where innovation meets implementation</p>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">About This Event</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <p class="lead text-center">Join us for WebHack 2K25, an intensive 8-hour hackathon celebrating National Engineers Day! This dynamic event brings together students and professionals to innovate, collaborate, and push the boundaries of technology.
+                    </p>
+                    <p class="text-center">Whether you're a seasoned developer or just starting your coding journey, WebHack 2K25 offers an inclusive environment to showcase your skills, learn from industry experts, and network with like-minded individuals. Get ready to code, create, and conquer!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Key Themes Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title">Key Themes</h2>
+        
+        <div class="key-themes-container">
+            <button class="scroll-btn left">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <div class="cards-scroller">
+                <!-- Card 1 -->
+                <div class="card theme-card">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Smart Education" class="theme-image">
+                    <div class="theme-content text-center">
+                        <div class="theme-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4>Smart Education</h4>
+                        <p>Digital-age learning solutions for effective, flexible education experiences.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="card theme-card">
+                    <img src="https://images.unsplash.com/photo-1565945887714-d5139f4eb0ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Transportation & Logistics" class="theme-image">
+                    <div class="theme-content text-center">
+                        <div class="theme-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h4>Transportation & Logistics</h4>
+                        <p>Innovative solutions for urban mobility and supply chain challenges.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="card theme-card">
+                    <img src="https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Disaster Management" class="theme-image">
+                    <div class="theme-content text-center">
+                        <div class="theme-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h4>Disaster Management</h4>
+                        <p>Risk mitigation and emergency response solutions for natural calamities.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="card theme-card">
+                    <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Tourism" class="theme-image">
+                    <div class="theme-content text-center">
+                        <div class="theme-icon">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <h4>Tourism</h4>
+                        <p>Digital innovations to revitalize travel, hospitality, and tourism sectors.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 5 -->
+                <div class="card theme-card">
+                    <img src="img.avif" alt="Games & Toys" class="theme-image">
+                    <div class="theme-content text-center">
+                        <div class="theme-icon">
+                            <i class="fas fa-dice"></i>
+                        </div>
+                        <h4>Games & Toys</h4>
+                        <p>Creative gaming solutions inspired by cultural heritage and history.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 6 -->
+                <div class="card theme-card">
+                    <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="FinTech" class="theme-image">
+                    <div class="theme-content text-center">
+                        <div class="theme-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>FinTech</h4>
+                        <p>Innovative financial technology solutions for modern banking needs.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 7 -->
+                <div class="card theme-card">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Fitness & Sports" class="theme-image">
+                    <div class="theme-content text-center">
+                        <div class="theme-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <h4>Fitness & Sports</h4>
+                        <p>Technology-driven fitness solutions and athletic performance enhancement.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 8 -->
+                <div class="card theme-card">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="MedTech/BioTech/HealthTech" class="theme-image">
+                    <div class="theme-content text-center">
+                        <div class="theme-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h4>MedTech/BioTech/HealthTech</h4>
+                        <p>Cutting-edge healthcare technology for improved medical outcomes.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 9 -->
+                <div class="card theme-card">
+                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Agriculture, FoodTech & Rural Development" class="theme-image">
+                    <div class="theme-content text-center">
+                        <div class="theme-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h4>Agriculture & FoodTech</h4>
+                        <p>Technology solutions for sustainable farming and food processing.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 10 -->
+                <div class="card theme-card">
+                    <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Clean & Green Technology" class="theme-image">
+                    <div class="theme-content text-center">
+                        <div class="theme-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h4>Clean & Green Technology</h4>
+                        <p>Eco-friendly solutions for waste management and environmental sustainability.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="scroll-btn right">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="scroll-indicators">
+                <div class="scroll-indicator active" data-index="0"></div>
+                <div class="scroll-indicator" data-index="1"></div>
+                <div class="scroll-indicator" data-index="2"></div>
+                <div class="scroll-indicator" data-index="3"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Event Details Cards -->
+    <!-- <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 p-4 text-center">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>When is the Event?</h3>
+                        <p class="text-muted">Mark your calendars for an unforgettable experience</p>
+                        <p class="fs-5 fw-bold text-primary">September 15-16, 2025</p>
+                        <p>9:30 AM to 9:30 PM (Day 1)<br>10:30 AM to 1:00 PM (Day 2) 
+                            <br>
+                            (GMT+5:30)
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 p-4 text-center">
+                        <div class="card-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Where is the Event?</h3>
+                        <p class="text-muted">Join us at this fantastic location</p>
+                        <p class="fs-5 fw-bold text-primary">Vignan's Institute of Engineering For Women</p>
+                        <p>Kapu Jaggaraju Peta, VSEZ Post, Visakhapatnam-530049</p>
+                        
+                        <div class="info-card">
+                            <h2><i class="fas fa-map"></i> Interactive Map</h2>
+                            
+                            <div class="map-controls">
+                                <button class="map-btn" id="increase-size">
+                                    <i class="fas fa-plus"></i> Increase Size
+                                </button>
+                                <button class="map-btn" id="decrease-size">
+                                    <i class="fas fa-minus"></i> Decrease Size
+                                </button>
+                                <button class="map-btn" id="reset-size">
+                                    <i class="fas fa-sync-alt"></i> Reset Size
+                                </button>
+                                <button class="map-btn" id="fullscreen">
+                                    <i class="fas fa-expand"></i> Fullscreen
+                                </button>
+                            </div>
+                            
+                            <div class="map-container" id="map-container">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3802.238901850897!2d83.3041912748461!3d17.65396509690875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3943135f6c15c7%3A0xbd84e1e6d5f5b3e5!2sVignan&#39;s%20Institute%20of%20Engineering%20for%20Women!5e0!3m2!1sen!2sin!4v1693425678906!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                            
+                            <div class="size-indicator" id="size-indicator">
+                                Current size: 400px height
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+
+    <!-- Event Details Cards -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 p-4 text-center">
+                    <div class="card-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>When is the Event?</h3>
+                    <p class="text-muted">Mark your calendars for an unforgettable experience</p>
+                    <p class="fs-5 fw-bold text-primary">September 15-16, 2025</p>
+                    <p>9:30 AM to 9:30 PM (Day 1)<br>10:30 AM to 1:00 PM (Day 2) 
+                        <br>
+                        (GMT+5:30)
+                    </p>
+                    
+                    <!-- Added "What's in it" section -->
+                    <div class="mt-4 pt-3 border-top">
+                        <h4 class="text-accent mb-3">What's in it?</h4>
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-primary me-2"><i class="fas fa-utensils"></i></span>
+                            <span>Free snacks</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-primary me-2"><i class="fas fa-gift"></i></span>
+                            <span>Swags</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-primary me-2"><i class="fas fa-users"></i></span>
+                            <span>Team size: Four members</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-primary me-2"><i class="fas fa-handshake"></i></span>
+                            <span>Networking with innovators</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-primary me-2"><i class="fas fa-lightbulb"></i></span>
+                            <span>Learning from industry experts</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 p-4 text-center">
+                    <div class="card-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Where is the Event?</h3>
+                    <p class="text-muted">Join us at this fantastic location</p>
+                    <p class="fs-5 fw-bold text-primary">Vignan's Institute of Engineering For Women</p>
+                    <p>Kapu Jaggaraju Peta, VSEZ Post, Visakhapatnam-530049</p>
+                    
+                    <div class="info-card">
+                        <h2><i class="fas fa-map"></i> Interactive Map</h2>
+                        
+                        <div class="map-controls">
+                            <button class="map-btn" id="increase-size">
+                                <i class="fas fa-plus"></i> Increase Size
+                            </button>
+                            <button class="map-btn" id="decrease-size">
+                                <i class="fas fa-minus"></i> Decrease Size
+                            </button>
+                            <button class="map-btn" id="reset-size">
+                                <i class="fas fa-sync-alt"></i> Reset Size
+                            </button>
+                            <button class="map-btn" id="fullscreen">
+                                <i class="fas fa-expand"></i> Fullscreen
+                            </button>
+                        </div>
+                        
+                        <div class="map-container" id="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3802.238901850897!2d83.3041912748461!3d17.65396509690875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3943135f6c15c7%3A0xbd84e1e6d5f5b3e5!2sVignan&#39;s%20Institute%20of%20Engineering%20for%20Women!5e0!3m2!1sen!2sin!4v1693425678906!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        
+                        <div class="size-indicator" id="size-indicator">
+                            Current size: 400px height
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Agenda Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Agenda</h2>
+            <div class="agenda-nav">
+                <div class="agenda-nav-item active" data-day="monday">Monday</div>
+                <div class="agenda-nav-item" data-day="tuesday">Tuesday</div>
+            </div>
+            
+            <div id="monday-agenda" class="agenda-content active">
+                <div class="timeline-item">
+                    <div class="timeline-time">9:30 AM</div>
+                    <div class="timeline-event">Tech Talks</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">11:00 AM</div>
+                    <div class="timeline-event">Announcement of Problem Statements</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">11:30 AM</div>
+                    <div class="timeline-event">Hackathon Begins</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">1:00 PM</div>
+                    <div class="timeline-event">Lunch</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">2:00 PM</div>
+                    <div class="timeline-event">Hackathon Continues</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">8:30 PM</div>
+                    <div class="timeline-event">Evaluation & Final Pitch</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">9:30 PM</div>
+                    <div class="timeline-event">Conclusion</div>
+                </div>
+            </div>
+            
+            <div id="tuesday-agenda" class="agenda-content">
+                <div class="timeline-item">
+                    <div class="timeline-time">11:00 AM</div>
+                    <div class="timeline-event">Distribution of Prizes for Top Three Teams</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Register Section -->
+    <section class="register-section">
+        <div class="container">
+            <h2 class="display-5 fw-bold mb-3">Ready to Showcase Your Skills?</h2>
+            <p class="lead mb-4">Join hundreds of developers in this exciting competition</p>
+            <a href="https://forms.gle/82CoJKt1rMCo1CV78" class="btn-register" target="_blank">Register Now</a>
+        </div>
+    </section>
+
+    <!-- Organizers Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Organizers</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 p-4 text-center">
+                        <img src="image1.jpg" alt="Organizer 1" class="organizer-img">
+                        <h4>Netaji Gandi</h4>
+                        <p class="text-muted">Lead Organizer</p>
+                        <p>AI & Technology Evangelist with 13+ years of experience in Machine Learning, Deep Learning, and guiding B.Tech students in programming and emerging technologies.
+                            <br></br>
+                            Contact - 8985887641
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 p-4 text-center">
+                        <img src="image2.jpg" alt="Organizer 2" class="organizer-img">
+                        <h4>Vasantha Rani</h4>
+                        <p class="text-muted">Lead Organizer</p>
+                        <p>Domain expert in Network Security and 11 years of teaching experience, dedicated to mentoring B.Tech students and fostering academic excellence through knowledge sharing and practical insights.
+                            <br></br>
+                            Contact - 9959002649
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 p-4 text-center">
+                        <img src="image3.jpg" alt="Organizer 3" class="organizer-img">
+                        <h4>Madhuri</h4>
+                        <p class="text-muted">Lead Organizer</p>
+                        <p>Specialized in Blockchain Technologies with 1 year of teaching experience, aspiring to advance research in blockchain while contributing to academia through impactful teaching, innovative research, and knowledge dissemination.
+                            <br></br>
+                            Contact - 7893806887
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- <footer class="text-center">
+        <div class="container">
+            <div class="social-icons mb-4">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            <p>© 2025 WebHack 2K25. All rights reserved.</p>
+        </div>
+    </footer> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Agenda navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const agendaNavItems = document.querySelectorAll('.agenda-nav-item');
+            const agendaContents = document.querySelectorAll('.agenda-content');
+            
+            agendaNavItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const day = this.getAttribute('data-day');
+                    
+                    // Update active nav item
+                    agendaNavItems.forEach(navItem => navItem.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    agendaContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === `${day}-agenda`) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Map controls functionality
+            const mapContainer = document.getElementById('map-container');
+            const increaseBtn = document.getElementById('increase-size');
+            const decreaseBtn = document.getElementById('decrease-size');
+            const resetBtn = document.getElementById('reset-size');
+            const fullscreenBtn = document.getElementById('fullscreen');
+            const sizeIndicator = document.getElementById('size-indicator');
+            
+            let currentHeight = 400;
+            const defaultHeight = 400;
+            const minHeight = 200;
+            const maxHeight = 800;
+            const step = 50;
+            
+            // Update size indicator
+            function updateSizeIndicator() {
+                sizeIndicator.textContent = `Current size: ${currentHeight}px height`;
+            }
+            
+            // Increase map size
+            increaseBtn.addEventListener('click', function() {
+                if (currentHeight < maxHeight) {
+                    currentHeight += step;
+                    mapContainer.style.height = `${currentHeight}px`;
+                    updateSizeIndicator();
+                }
+            });
+            
+            // Decrease map size
+            decreaseBtn.addEventListener('click', function() {
+                if (currentHeight > minHeight) {
+                    currentHeight -= step;
+                    mapContainer.style.height = `${currentHeight}px`;
+                    updateSizeIndicator();
+                }
+            });
+            
+            // Reset map size
+            resetBtn.addEventListener('click', function() {
+                currentHeight = defaultHeight;
+                mapContainer.style.height = `${currentHeight}px`;
+                updateSizeIndicator();
+            });
+            
+            // Toggle fullscreen
+            fullscreenBtn.addEventListener('click', function() {
+                if (currentHeight < 600) {
+                    currentHeight = 600;
+                } else {
+                    currentHeight = maxHeight;
+                }
+                mapContainer.style.height = `${currentHeight}px`;
+                updateSizeIndicator();
+            });
+            
+            // Initialize size indicator
+            updateSizeIndicator();
+        });
+
+
+          document.addEventListener('DOMContentLoaded', function() {
+            const scroller = document.querySelector('.cards-scroller');
+            const leftBtn = document.querySelector('.scroll-btn.left');
+            const rightBtn = document.querySelector('.scroll-btn.right');
+            const indicators = document.querySelectorAll('.scroll-indicator');
+            
+            // Calculate scroll amount (3 cards at a time)
+            const scrollAmount = 320 * 3; // card width + margin
+            
+            leftBtn.addEventListener('click', () => {
+                scroller.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+            
+            rightBtn.addEventListener('click', () => {
+                scroller.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+            
+            // Update indicators on scroll
+            scroller.addEventListener('scroll', () => {
+                const scrollPos = scroller.scrollLeft;
+                const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+                
+                // Calculate active indicator
+                const indicatorIndex = Math.min(
+                    Math.floor(scrollPos / (maxScroll / (indicators.length - 1))),
+                    indicators.length - 1
+                );
+                
+                // Update active indicator
+                indicators.forEach((indicator, index) => {
+                    if (index === indicatorIndex) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Click on indicators to scroll to position
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    const scrollPos = (scroller.scrollWidth / indicators.length) * index;
+                    scroller.scrollTo({ left: scrollPos, behavior: 'smooth' });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
